@@ -13,6 +13,7 @@ import com.emersondantas.cursomc.domain.Cidade;
 import com.emersondantas.cursomc.domain.Cliente;
 import com.emersondantas.cursomc.domain.Endereco;
 import com.emersondantas.cursomc.domain.Estado;
+import com.emersondantas.cursomc.domain.ItemPedido;
 import com.emersondantas.cursomc.domain.Pagamento;
 import com.emersondantas.cursomc.domain.PagamentoComBoleto;
 import com.emersondantas.cursomc.domain.PagamentoComCartao;
@@ -25,6 +26,7 @@ import com.emersondantas.cursomc.repositories.CidadeRepository;
 import com.emersondantas.cursomc.repositories.ClienteRepository;
 import com.emersondantas.cursomc.repositories.EnderecoRepository;
 import com.emersondantas.cursomc.repositories.EstadoRepository;
+import com.emersondantas.cursomc.repositories.ItemPedidoRepository;
 import com.emersondantas.cursomc.repositories.PagamentoRepository;
 import com.emersondantas.cursomc.repositories.PedidoRepository;
 import com.emersondantas.cursomc.repositories.ProdutoRepository;
@@ -47,6 +49,8 @@ public class CursomcApplication implements CommandLineRunner{
 	private PedidoRepository pedidoRepository;
 	@Autowired
 	private PagamentoRepository pagamentoRepository;
+	@Autowired
+	private ItemPedidoRepository itemPedidoRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(CursomcApplication.class, args);
@@ -109,6 +113,19 @@ public class CursomcApplication implements CommandLineRunner{
 		
 		pedidoRepository.saveAll(Arrays.asList(ped1, ped2));
 		pagamentoRepository.saveAll(Arrays.asList(pagto1, pagto2));
+		
+		ItemPedido ip1 = new ItemPedido(ped1, p1, 0.0, 1, 2000.0);
+		ItemPedido ip2 = new ItemPedido(ped1, p3, 0.0, 2, 80.0);
+		ItemPedido ip3 = new ItemPedido(ped2, p2, 100.0, 1, 800.0);
+		
+		ped1.getItens().addAll(Arrays.asList(ip1, ip2));
+		ped2.getItens().addAll(Arrays.asList(ip3));
+		
+		p1.getItens().addAll(Arrays.asList(ip1));
+		p2.getItens().addAll(Arrays.asList(ip3));
+		p3.getItens().addAll(Arrays.asList(ip2));
+		
+		itemPedidoRepository.saveAll(Arrays.asList(ip1,ip2,ip3));
 	}
 
 }
