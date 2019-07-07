@@ -13,6 +13,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.emersondantas.cursomc.domain.Categoria;
 import com.emersondantas.cursomc.services.CategoriaService;
+import com.emersondantas.cursomc.services.exceptions.DataIntegrityException;
 import com.emersondantas.cursomc.services.exceptions.ObjectNotFoundException;
 
 @RestController
@@ -38,6 +39,12 @@ public class CategoriaResource {
 	public ResponseEntity<Void> update(@RequestBody Categoria obj, @PathVariable Integer id) throws ObjectNotFoundException{
 		obj.setId(id);
 		obj = service.update(obj);
+		return ResponseEntity.noContent().build();
+	}
+	
+	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
+	public ResponseEntity<Void> delete(@PathVariable Integer id) throws ObjectNotFoundException, DataIntegrityException{
+		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
 }
