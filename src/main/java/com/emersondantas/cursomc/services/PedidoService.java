@@ -15,7 +15,7 @@ public class PedidoService {
 	@Autowired //Automaticamente instanciado pelo spring por injeção de dependência
 	private PedidoRepository repo;
 	
-	public Pedido buscar(Integer id) throws ObjectNotFoundException{
+	public Pedido find(Integer id) throws ObjectNotFoundException{
 		Optional<Pedido> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Pedido.class.getName()));

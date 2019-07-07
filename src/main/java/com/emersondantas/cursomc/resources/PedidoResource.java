@@ -18,8 +18,8 @@ public class PedidoResource {
 	private PedidoService service;
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public ResponseEntity<?> find(@PathVariable Integer id) throws ObjectNotFoundException {
-		Pedido obg = service.buscar(id);
+	public ResponseEntity<Pedido> find(@PathVariable Integer id) throws ObjectNotFoundException {
+		Pedido obg = service.find(id);
 		return ResponseEntity.ok().body(obg);
 	}
 }
