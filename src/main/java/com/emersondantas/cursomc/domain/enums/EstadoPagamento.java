@@ -1,7 +1,7 @@
 package com.emersondantas.cursomc.domain.enums;
 
 public enum EstadoPagamento {
-	PENDENDTE(1, "Pendente"),
+	PENDENTE(1, "Pendente"),
 	QUITADO(2, "Quitado"),
 	CANCELADO(3, "Cancelado");
 	
